@@ -45,10 +45,17 @@ def main():
         screen.blit(background_image, [0, 0])
         screen.blit(hero_image, [hero_x, hero_y])
         screen.blit(monster_image, [monster_x, monster_y])
+        
         # Game display
-
         pygame.display.update()
         clock.tick(60)
+
+        # Monster move to right and wrap around to the left edge 
+        # of the screen if he goes off the right side
+        if he goes off screen
+        monster_x += 1
+        if monster_x > 512:
+            monster_x = 1
 
     pygame.quit()
 
