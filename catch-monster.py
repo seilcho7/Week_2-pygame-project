@@ -20,6 +20,13 @@ def main():
     monster_image = pygame.image.load('images/monster.png')
 
     # Game initialization
+    # Set initial location of hero
+    hero_x = 240
+    hero_y = 224
+    
+    # Set initial location of monster
+    monster_x = 241
+    monster_y = 112
 
     stop_game = False
     while not stop_game:
@@ -36,8 +43,8 @@ def main():
         # Draw background
         screen.fill(blue_color)
         screen.blit(background_image, [0, 0])
-        screen.blit(hero_image, [240, 224])
-        screen.blit(monster_image, [241, 112])
+        screen.blit(hero_image, [hero_x, hero_y])
+        screen.blit(monster_image, [monster_x, monster_y])
         # Game display
 
         pygame.display.update()
