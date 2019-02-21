@@ -1,14 +1,23 @@
 import pygame
 
 def main():
-    width = 500
-    height = 500
+    width = 512
+    height = 480
     blue_color = (97, 159, 182)
 
     pygame.init()
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption('My Game')
     clock = pygame.time.Clock()
+    
+    # Load background image
+    background_image = pygame.image.load('images/background.png')
+    
+    # Load hero image
+    hero_image = pygame.image.load('images/hero.png')
+
+    # Load monster image
+    monster_image = pygame.image.load('images/monster.png')
 
     # Game initialization
 
@@ -26,7 +35,9 @@ def main():
 
         # Draw background
         screen.fill(blue_color)
-
+        screen.blit(background_image, [0, 0])
+        screen.blit(hero_image, [240, 224])
+        screen.blit(monster_image, [241, 112])
         # Game display
 
         pygame.display.update()
