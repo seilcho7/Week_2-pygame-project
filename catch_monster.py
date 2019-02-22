@@ -15,6 +15,8 @@ class Character():
         if math.sqrt((self.x - char.x)**2 + ((self.y - char.y))**2) < 32:
             if type(char) == Monster:
                 char.show = False
+                self.x = 240
+                self.y = 324
                 
 
 
@@ -79,7 +81,7 @@ def main():
 
     # Set surface and font for text
     pygame.font.init()
-    textfont = pygame.font.SysFont('Comic Sans MS', 40)
+    textfont = pygame.font.SysFont(None, 40)
     end_text = textfont.render('Hit ENTER to play again!', 1, (0, 0, 0))
     
      # Set background music
@@ -112,7 +114,7 @@ def main():
 
     # Game initialization
     # Set initial location of hero
-    hero = Hero(240, 224)
+    hero = Hero(240, 324)
     hero.show = True
     
     # Set initial location of monsters
@@ -122,7 +124,7 @@ def main():
     # monster_four = Monster(241, 112)
     monster.show = True
 
-    change_dir_countdown = 60
+    change_dir_countdown = 30
 
     stop_game = False
     while not stop_game:
@@ -181,7 +183,7 @@ def main():
             # monster_two.change_direction(random.randint(0, 3), random.randint(2, 5))
             # monster_three.change_direction(random.randint(0, 3), random.randint(2, 5))
             # monster_four.change_direction(random.randint(0, 3), random.randint(2, 5))
-            change_dir_countdown = 60
+            change_dir_countdown = 30
 
         
         # Draw background
@@ -198,12 +200,30 @@ def main():
             # screen.blit(monster_image, [monster_two.x, monster_two.y])
             # screen.blit(monster_image, [monster_three.x, monster_three.y])
             # screen.blit(monster_image, [monster_four.x, monster_four.y])
+        
         # When catch a monster, play sound effect, put text in the middle, end game
         else:
             if win_sound == 0:
                 win.play()
                 win_sound = 1
             screen.blit(end_text, (90, 224))
+            
+            # Reset hero and monster position back to original
+            hero.x = 240
+            hero.y = 324
+            monster.x = 241
+            monster.y = 112
+            
+            # Play again when ENTER is pressed
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        win_sound = 0
+                        monster.show = True
+
+
+
+
 
         # Game display
         pygame.display.update()
