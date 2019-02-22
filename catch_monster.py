@@ -76,6 +76,11 @@ def main():
     width = 512
     height = 480
     blue_color = (97, 159, 182)
+
+    # Set surface and font for text
+    pygame.font.init()
+    textfont = pygame.font.SysFont('Comic Sans MS', 40)
+    end_text = textfont.render('Hit ENTER to play again!', 1, (0, 0, 0))
     
      # Set background music
     pygame.mixer.init()
@@ -93,7 +98,7 @@ def main():
 
     pygame.init()
     screen = pygame.display.set_mode((width, height))
-    pygame.display.set_caption('My Game')
+    pygame.display.set_caption('Catch Monster')
     clock = pygame.time.Clock()
     
     # Load background image
@@ -193,10 +198,12 @@ def main():
             # screen.blit(monster_image, [monster_two.x, monster_two.y])
             # screen.blit(monster_image, [monster_three.x, monster_three.y])
             # screen.blit(monster_image, [monster_four.x, monster_four.y])
+        # When catch a monster, play sound effect, put text in the middle, end game
         else:
             if win_sound == 0:
                 win.play()
                 win_sound = 1
+            screen.blit(end_text, (90, 224))
 
         # Game display
         pygame.display.update()
