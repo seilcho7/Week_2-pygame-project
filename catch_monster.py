@@ -23,7 +23,6 @@ class Character():
                 self.direction_x = -self.direction_x
                 self.direction_y = -self.direction_y
 
-
 # Monster class inherit from Character class
 class Monster(Character):
     # Monster starts moving around
@@ -68,7 +67,6 @@ class Goblin(Monster):
         self.x += self.direction_x
         self.y += self.direction_y
         
-    
     # Goblin cannot go past bush and turns back when they hit bush
     def fence(self):
         if self.x <= 32:
@@ -80,12 +78,6 @@ class Goblin(Monster):
         if self.y >= 416:
             self.direction_y = -self.direction_y
        
-
-        
-
-
-    
-
 # Hero class inherit from Character class
 class Hero(Character):  
     # As arrow keys are pressed, hero move to the direction of the arrow
@@ -102,28 +94,30 @@ class Hero(Character):
     # Hero cannot go past bush
     def fence(self):
         if self.x <= 32:
-            self.x = 32
+            self.x = 33
         if self.x >= 448:
-            self.x = 448
+            self.x = 447
         if self.y <= 32:
-            self.y = 32
+            self.y = 33
         if self.y >= 416:
-            self.y = 416
+            self.y = 415
     
-
 def main():
     width = 512
     height = 480
-    blue_color = (97, 159, 182)
+
+    # Level counter
+    level = 1
 
     # Set surface and font for text
     pygame.font.init()
     textfont = pygame.font.SysFont(None, 30)
+    levelfont = pygame.font.SysFont(None, 26)
     win_text = textfont.render('Hit ENTER to play again!', 1, (0, 0, 0))
     lose_text = textfont.render('You lose! Hit ENTER to play again.', 1, (0, 0, 0))
+    level_text = levelfont.render(('Level %d' % level), 1, (255, 255, 255))
      
-     
-     # Set background music
+    # Set background music
     pygame.mixer.init()
     music = pygame.mixer.Sound('sounds/music.wav')
     music.set_volume(0.3)
@@ -171,7 +165,9 @@ def main():
     hero.show = True
     monster.show = True
     goblin.show = True
+    
 
+    # Count for monster and goblin change_direction function
     change_dir_countdown = 30
 
     stop_game = False
@@ -197,7 +193,7 @@ def main():
                     hero.direction_x = 0
                 elif event.key == pygame.K_RIGHT:
                     hero.direction_x = 0
-        
+
         # Call function for fence which prevent hero and monster
         # going outside bush
         Hero.fence(hero)
@@ -226,12 +222,14 @@ def main():
 
         
         # Draw background
-        screen.fill(blue_color)
-        screen.blit(background_image, [0, 0])
+        screen.blit(background_image, (0, 0))
+
+        # Show level on top left
+        screen.blit(level_text, (5, 5))
         
         # Show hero as long as it is alive
         if hero.show == True:
-            screen.blit(hero_image, [hero.x, hero.y])   
+            screen.blit(hero_image, (hero.x, hero.y)  ) 
         
         # When goblin catch hero, play sound effect, put text, end game
         else:
@@ -249,15 +247,15 @@ def main():
                 if event.key == pygame.K_RETURN:
                     lose_sound = 0
                     # Put monster back in random position
-                    hero.x = random.randint(33, 447)
-                    hero.y = random.randint(33, 415)
-                    monster.x = random.randint(33, 447)
-                    monster.y = random.randint(33, 415)
+                    hero.x = random.randint(35, 445)
+                    hero.y = random.randint(35, 413)
+                    monster.x = random.randint(35, 445)
+                    monster.y = random.randint(35, 413)
                     hero.show = True
 
         # Show monster as long as hero does not catch
         if monster.show == True:        
-            screen.blit(monster_image, [monster.x, monster.y])
+            screen.blit(monster_image, (monster.x, monster.y))
 
         # When catch a monster, play sound effect, put text, end game
         else:
@@ -274,16 +272,16 @@ def main():
                 if event.key == pygame.K_RETURN:
                     win_sound = 0
                     # Put monster back in random position
-                    monster.x = random.randint(33, 447)
-                    monster.y = random.randint(33, 415)
-                    goblin.x = random.randint(33, 447)
-                    goblin.y = random.randint(33, 447)
+                    monster.x = random.randint(35, 445)
+                    monster.y = random.randint(35, 413)
+                    goblin.x = random.randint(35, 445)
+                    goblin.y = random.randint(35, 413)
                     monster.show = True
                     goblin.show = True
         
         # Show goblins
         if goblin.show == True:
-            screen.blit(goblin_image, [goblin.x, goblin.y])
+            screen.blit(goblin_image, (goblin.x, goblin.y))
         
         # Game display
         pygame.display.update()
