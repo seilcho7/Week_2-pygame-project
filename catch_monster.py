@@ -189,6 +189,10 @@ def main():
     # Count for monster and goblin change_direction function
     change_dir_countdown = 60
 
+    # Set count for collision to occur
+    free_count = 0
+    free_countdown = 60
+
     stop_game = False
     while not stop_game:
         # Set level text to update every level
@@ -237,16 +241,17 @@ def main():
         # Call function for collision
         hero.distance(monster)
         # Goblin catch hero
-        goblin.distance(hero)
-        goblin_b.distance(hero)
-        goblin_c.distance(hero)
-        goblin_d.distance(hero)
-        goblin_e.distance(hero)
-        goblin_f.distance(hero)
-        goblin_g.distance(hero)
-        goblin_h.distance(hero)
-        goblin_i.distance(hero)
-        goblin_j.distance(hero)
+        if free_count == 0:
+            goblin.distance(hero)
+            goblin_b.distance(hero)
+            goblin_c.distance(hero)
+            goblin_d.distance(hero)
+            goblin_e.distance(hero)
+            goblin_f.distance(hero)
+            goblin_g.distance(hero)
+            goblin_h.distance(hero)
+            goblin_i.distance(hero)
+            goblin_j.distance(hero)
         # Monster bump with goblins
         monster.distance(goblin)
         monster.distance(goblin_b)
@@ -330,6 +335,10 @@ def main():
         
         # Every loop, change_dir_countdown decrease by 1
         change_dir_countdown -= 1
+
+        free_countdown -= 1
+        if free_countdown == 0:
+            free_count = 0
         
         # When countdown hit 0, monster change to random direction and speed
         if change_dir_countdown == 0:
@@ -380,6 +389,8 @@ def main():
             # Play again when ENTER is pressed
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
+                    free_count += 1
+                    free_countdown = 60
                     lose_sound = 0
                     level = 1
                     change_dir_countdown = 60
@@ -456,6 +467,8 @@ def main():
             # Goblins stop for a while before moving when starting new game
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
+                    free_count += 1
+                    free_countdown = 60
                     win_sound = 0
                     level += 1
                     change_dir_countdown = 60
