@@ -162,17 +162,15 @@ def main():
     goblin = Goblin(random.randint(33, 447), random.randint(33, 415))
 
     # Add more goblin
-    if level - 1 < level:
-        goblin_two = Goblin(random.randint(35, 445), random.randint(35, 413))
+    goblin_two = Goblin(512, 480)
+    goblin_three = Goblin(512, 480)
     
     # Show image only when True
     hero.show = True
     monster.show = True
     goblin.show = True
     goblin_two.show = False
-
-    print(level)
-    
+    goblin_three.show = False
 
     # Count for monster and goblin change_direction function
     change_dir_countdown = 30
@@ -209,6 +207,9 @@ def main():
         Hero.fence(hero)
         Goblin.fence(goblin)
         Goblin.fence(goblin_two)
+        Goblin.fence(goblin_three)
+        
+
 
         # Event handling
         if event.type == pygame.QUIT:
@@ -216,23 +217,39 @@ def main():
 
         # Call function for collision
         hero.distance(monster)
+        # Goblin catch hero
         goblin.distance(hero)
         goblin_two.distance(hero)
+        goblin_three.distance(hero)
+        # Monster bump with goblins
         monster.distance(goblin)
         monster.distance(goblin_two)
+        monster.distance(goblin_three)
+        # Goblins bump each other
+        goblin.distance(goblin_two)
+        goblin.distance(goblin_three)
+        goblin_two.distance(goblin_three)
 
         # Game logic
         hero.move(hero.direction_x, hero.direction_y)
         monster.move()
         goblin.move()
-        goblin_two.move()
+        if level >= 2:
+            goblin_two.move()
+        if level >= 3:
+            goblin_three.move()
+        
+        # Every loop, change_dir_countdown decrease by 1
         change_dir_countdown -= 1
         
         # When countdown hit 0, monster change to random direction and speed
         if change_dir_countdown == 0:
             monster.change_direction(random.randint(0, 3), random.randint(0, 5))
             goblin.change_direction(random.randint(0, 3), random.randint(0, 2))
-            goblin_two.change_direction(random.randint(0, 3), random.randint(0, 2))
+            if level >= 2:
+                goblin_two.change_direction(random.randint(0, 3), random.randint(0, 2))
+            if level >= 3:
+                goblin_three.change_direction(random.randint(0, 3), random.randint(0, 2))
             change_dir_countdown = 30
 
         
@@ -271,6 +288,9 @@ def main():
                     goblin_two.x = 512
                     goblin_two.y = 480
                     goblin_two.show = False
+                    goblin_three.x = 512
+                    goblin_three.y = 480
+                    goblin_three.show = False
 
         # Show monster as long as hero does not catch
         if monster.show == True:        
@@ -286,14 +306,19 @@ def main():
             goblin.y = 480
             goblin_two.x = 512
             goblin_two.y = 480
+            goblin_three.x = 512
+            goblin_three.y = 480
             
             # Play again when ENTER is pressed
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     win_sound = 0
-                    if level - 1 < level:
+                    level += 1
+                    if level >= 2:
                         goblin_two.show = True
-                        level += 1
+                    if level >= 3:
+                        goblin_two.show = True
+                        goblin_three.show = True
 
                     # Put monster back in random position
                     monster.x = random.randint(35, 445)
@@ -302,6 +327,8 @@ def main():
                     goblin.y = random.randint(35, 413)
                     goblin_two.x = random.randint(35, 445)
                     goblin_two.y = random.randint(35, 413)
+                    goblin_three.x = random.randint(35, 445)
+                    goblin_three.y = random.randint(35, 413)
                     monster.show = True
                     goblin.show = True
         
@@ -311,6 +338,9 @@ def main():
         
         if goblin_two.show == True:
             screen.blit(goblin_image, (goblin_two.x, goblin_two.y))
+
+        if goblin_three.show == True:
+            screen.blit(goblin_image, (goblin_three.x, goblin_three.y))
         
         # Game display
         pygame.display.update()
