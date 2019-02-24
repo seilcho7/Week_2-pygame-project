@@ -195,7 +195,7 @@ def main():
 
     # Set count for collision to occur
     free_count = 0
-    free_countdown = 80
+    free_countdown = 60
 
     stop_game = False
     while not stop_game:
@@ -388,7 +388,7 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     free_count += 1
-                    free_countdown = 80
+                    free_countdown = 60
                     lose_sound = 0
                     level = 1
                     change_dir_countdown = 30
@@ -470,7 +470,7 @@ def main():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
                         free_count += 1
-                        free_countdown = 80
+                        free_countdown = 60
                         win_sound = 0
                         level += 1
                         change_dir_countdown = 30
