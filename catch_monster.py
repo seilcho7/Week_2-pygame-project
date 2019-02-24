@@ -187,7 +187,7 @@ def main():
     goblin_j.show = False
 
     # Count for monster and goblin change_direction function
-    change_dir_countdown = 60
+    change_dir_countdown = 30
 
     # Set count for collision to occur
     free_count = 0
@@ -252,63 +252,63 @@ def main():
             goblin_h.distance(hero)
             goblin_i.distance(hero)
             goblin_j.distance(hero)
-        # Monster bump with goblins
-        monster.distance(goblin)
-        monster.distance(goblin_b)
-        monster.distance(goblin_c)
-        monster.distance(goblin_d)
-        monster.distance(goblin_e)
-        monster.distance(goblin_f)
-        monster.distance(goblin_g)
-        monster.distance(goblin_h)
-        monster.distance(goblin_i)
-        monster.distance(goblin_j)
-        # Goblins bump each other
-        goblin.distance(goblin_b)
-        goblin.distance(goblin_c)
-        goblin.distance(goblin_d)
-        goblin.distance(goblin_e)
-        goblin.distance(goblin_f)
-        goblin.distance(goblin_g)
-        goblin.distance(goblin_h)
-        goblin.distance(goblin_i)
-        goblin.distance(goblin_j)
-        goblin_b.distance(goblin_c)
-        goblin_b.distance(goblin_d)
-        goblin_b.distance(goblin_e)
-        goblin_b.distance(goblin_f)
-        goblin_b.distance(goblin_g)
-        goblin_b.distance(goblin_h)
-        goblin_b.distance(goblin_i)
-        goblin_b.distance(goblin_j)
-        goblin_c.distance(goblin_d)
-        goblin_c.distance(goblin_e)
-        goblin_c.distance(goblin_f)
-        goblin_c.distance(goblin_g)
-        goblin_c.distance(goblin_h)
-        goblin_c.distance(goblin_i)
-        goblin_c.distance(goblin_j)
-        goblin_d.distance(goblin_e)
-        goblin_d.distance(goblin_f)
-        goblin_d.distance(goblin_g)
-        goblin_d.distance(goblin_h)
-        goblin_d.distance(goblin_i)
-        goblin_d.distance(goblin_j)
-        goblin_e.distance(goblin_f)
-        goblin_e.distance(goblin_g)
-        goblin_e.distance(goblin_h)
-        goblin_e.distance(goblin_i)
-        goblin_e.distance(goblin_j)
-        goblin_f.distance(goblin_g)
-        goblin_f.distance(goblin_h)
-        goblin_f.distance(goblin_i)
-        goblin_f.distance(goblin_j)
-        goblin_g.distance(goblin_h)
-        goblin_g.distance(goblin_i)
-        goblin_g.distance(goblin_j)
-        goblin_h.distance(goblin_i)
-        goblin_h.distance(goblin_j)
-        goblin_i.distance(goblin_j)
+        # # Monster bump with goblins
+        # monster.distance(goblin)
+        # monster.distance(goblin_b)
+        # monster.distance(goblin_c)
+        # monster.distance(goblin_d)
+        # monster.distance(goblin_e)
+        # monster.distance(goblin_f)
+        # monster.distance(goblin_g)
+        # monster.distance(goblin_h)
+        # monster.distance(goblin_i)
+        # monster.distance(goblin_j)
+        # # Goblins bump each other
+        # goblin.distance(goblin_b)
+        # goblin.distance(goblin_c)
+        # goblin.distance(goblin_d)
+        # goblin.distance(goblin_e)
+        # goblin.distance(goblin_f)
+        # goblin.distance(goblin_g)
+        # goblin.distance(goblin_h)
+        # goblin.distance(goblin_i)
+        # goblin.distance(goblin_j)
+        # goblin_b.distance(goblin_c)
+        # goblin_b.distance(goblin_d)
+        # goblin_b.distance(goblin_e)
+        # goblin_b.distance(goblin_f)
+        # goblin_b.distance(goblin_g)
+        # goblin_b.distance(goblin_h)
+        # goblin_b.distance(goblin_i)
+        # goblin_b.distance(goblin_j)
+        # goblin_c.distance(goblin_d)
+        # goblin_c.distance(goblin_e)
+        # goblin_c.distance(goblin_f)
+        # goblin_c.distance(goblin_g)
+        # goblin_c.distance(goblin_h)
+        # goblin_c.distance(goblin_i)
+        # goblin_c.distance(goblin_j)
+        # goblin_d.distance(goblin_e)
+        # goblin_d.distance(goblin_f)
+        # goblin_d.distance(goblin_g)
+        # goblin_d.distance(goblin_h)
+        # goblin_d.distance(goblin_i)
+        # goblin_d.distance(goblin_j)
+        # goblin_e.distance(goblin_f)
+        # goblin_e.distance(goblin_g)
+        # goblin_e.distance(goblin_h)
+        # goblin_e.distance(goblin_i)
+        # goblin_e.distance(goblin_j)
+        # goblin_f.distance(goblin_g)
+        # goblin_f.distance(goblin_h)
+        # goblin_f.distance(goblin_i)
+        # goblin_f.distance(goblin_j)
+        # goblin_g.distance(goblin_h)
+        # goblin_g.distance(goblin_i)
+        # goblin_g.distance(goblin_j)
+        # goblin_h.distance(goblin_i)
+        # goblin_h.distance(goblin_j)
+        # goblin_i.distance(goblin_j)
 
         # Game logic
         hero.move(hero.direction_x, hero.direction_y)
@@ -343,26 +343,26 @@ def main():
         # When countdown hit 0, monster change to random direction and speed
         if change_dir_countdown == 0:
             monster.change_direction(random.randint(0, 3), random.randint(0, 5))
-            goblin.change_direction(random.randint(0, 3), random.randint(0, 2))
+            goblin.change_direction(random.randint(0, 3), random.randint(0, 3))
             if level >= 2:
-                goblin_b.change_direction(random.randint(0, 3), random.randint(0, 2))
+                goblin_b.change_direction(random.randint(0, 3), random.randint(0, 3))
             if level >= 3:
-                goblin_c.change_direction(random.randint(0, 3), random.randint(0, 2))
+                goblin_c.change_direction(random.randint(0, 3), random.randint(0, 3))
             if level >= 4:
-                goblin_d.change_direction(random.randint(0, 3), random.randint(0, 2))
+                goblin_d.change_direction(random.randint(0, 3), random.randint(0, 4))
             if level >= 5:
-                goblin_e.change_direction(random.randint(0, 3), random.randint(0, 2))
+                goblin_e.change_direction(random.randint(0, 3), random.randint(0, 4))
             if level >= 6:
-                goblin_f.change_direction(random.randint(0, 3), random.randint(0, 2))
+                goblin_f.change_direction(random.randint(0, 3), random.randint(0, 4))
             if level >= 7:
-                goblin_g.change_direction(random.randint(0, 3), random.randint(0, 2))
+                goblin_g.change_direction(random.randint(0, 3), random.randint(0, 5))
             if level >= 8:
-                goblin_h.change_direction(random.randint(0, 3), random.randint(0, 2))
+                goblin_h.change_direction(random.randint(0, 3), random.randint(0, 5))
             if level >= 9:
-                goblin_i.change_direction(random.randint(0, 3), random.randint(0, 2))
+                goblin_i.change_direction(random.randint(0, 3), random.randint(0, 5))
             if level >= 10:
-                goblin_j.change_direction(random.randint(0, 3), random.randint(0, 2))
-            change_dir_countdown = 60
+                goblin_j.change_direction(random.randint(0, 3), random.randint(0, 7))
+            change_dir_countdown = 30
 
         
         # Draw background
@@ -393,7 +393,7 @@ def main():
                     free_countdown = 60
                     lose_sound = 0
                     level = 1
-                    change_dir_countdown = 60
+                    change_dir_countdown = 30
                     print(change_dir_countdown)
                     # Put monster back in random position
                     hero.x = random.randint(35, 445)
@@ -471,7 +471,7 @@ def main():
                     free_countdown = 60
                     win_sound = 0
                     level += 1
-                    change_dir_countdown = 60
+                    change_dir_countdown = 30
                     monster.show = True
                     monster.x = random.randint(35, 445)
                     monster.y = random.randint(35, 413)
