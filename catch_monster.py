@@ -122,27 +122,29 @@ def main():
      
     # Set background music
     pygame.mixer.init()
-    music = pygame.mixer.Sound('sounds/music.wav')
-    music.set_volume(0.3)
+    # music = pygame.mixer.Sound('sounds/music.wav')
+    pygame.mixer.music.load('sounds/ff_background.mp3')
+    pygame.mixer.music.set_volume(0.5)
     
     # Set win sound effect
-    win = pygame.mixer.Sound('sounds/win.wav')
-    win.set_volume(1.0)
+    win = pygame.mixer.Sound('sounds/ff_catch.wav')
+    win.set_volume(0.6)
 
     # Set lose sound effect
-    lose = pygame.mixer.Sound('sounds/lose.wav')
-    lose.set_volume(0.5)
+    lose = pygame.mixer.Sound('sounds/ff_lose.wav')
+    lose.set_volume(0.6)
+
+    # Set victory sound effect
+    victory = pygame.mixer.Sound('sounds/ff_victory.wav')
+    victory.set_volume(0.1)
 
     # Counter to play win, lose only once
     win_sound = 0
     lose_sound = 0
     
     # Background music loops
-    pause = False
-    if not pause:
-        music.play(-1)
+    pygame.mixer.music.play(-1)
     
-
     pygame.init()
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption('Catch Monsters')
@@ -395,7 +397,7 @@ def main():
                     lose_sound = 0
                     level = 1
                     change_dir_countdown = 30
-                    print(change_dir_countdown)
+
                     # Put monster back in random position
                     hero.x = random.randint(35, 445)
                     hero.y = random.randint(35, 413)
@@ -534,7 +536,7 @@ def main():
                                         goblin_j.y = random.randint(35, 413)
                                         goblin_j.direction_x = 0
                                         goblin_j.direction_y = 0
-                                                                   
+                                                                
         # Show goblins
         if goblin.show == True:
             screen.blit(goblin_image, (goblin.x, goblin.y))
@@ -560,6 +562,9 @@ def main():
         # Game over text after beating level 10
         # Ask player to player to press ENTER to play again
         if level == 6:
+            # Stop background music and play game over music
+            pygame.mixer.music.stop()
+            victory.play(-1)
             level_text = levelfont.render('Game Over', 1, (255, 255, 255))
             screen.blit(level_text, (5, 5))
             screen.blit(caught_text, (120, 180))
@@ -568,6 +573,8 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     level = 0
+                    pygame.mixer.music.play(-1)
+                    victory.stop()
         
         # Game display
         pygame.display.update()
