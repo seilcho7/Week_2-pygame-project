@@ -138,7 +138,10 @@ def main():
     lose_sound = 0
     
     # Background music loops
-    music.play(-1)
+    pause = False
+    if not pause:
+        music.play(-1)
+    
 
     pygame.init()
     screen = pygame.display.set_mode((width, height))
@@ -345,21 +348,21 @@ def main():
         # When countdown hit 0, monster change to random direction and speed
         if level < 6:
             if change_dir_countdown == 0:
-                monster.change_direction(random.randint(0, 3), random.randint(0, 5))
-                goblin.change_direction(random.randint(0, 3), random.randint(0, 3))
+                monster.change_direction(random.randint(0, 3), random.randint(0, 4))
+                goblin.change_direction(random.randint(0, 3), random.randint(0, 2))
                 if level >= 2:
-                    goblin_b.change_direction(random.randint(0, 3), random.randint(0, 3))
-                    goblin_c.change_direction(random.randint(0, 3), random.randint(0, 3))
+                    goblin_b.change_direction(random.randint(0, 3), random.randint(0, 2))
+                    goblin_c.change_direction(random.randint(0, 3), random.randint(0, 2))
                 if level >= 3:
-                    goblin_d.change_direction(random.randint(0, 3), random.randint(0, 3))
-                    goblin_e.change_direction(random.randint(0, 3), random.randint(0, 3))
+                    goblin_d.change_direction(random.randint(0, 3), random.randint(0, 2))
+                    goblin_e.change_direction(random.randint(0, 3), random.randint(0, 2))
                 if level >= 4:
-                    goblin_f.change_direction(random.randint(0, 3), random.randint(0, 3))
-                    goblin_g.change_direction(random.randint(0, 3), random.randint(0, 3))
+                    goblin_f.change_direction(random.randint(0, 3), random.randint(0, 2))
+                    goblin_g.change_direction(random.randint(0, 3), random.randint(0, 2))
                 if level >= 5:
-                    goblin_h.change_direction(random.randint(0, 3), random.randint(0, 3))
-                    goblin_i.change_direction(random.randint(0, 3), random.randint(0, 3))
-                    goblin_j.change_direction(random.randint(0, 3), random.randint(0, 3))
+                    goblin_h.change_direction(random.randint(0, 3), random.randint(0, 2))
+                    goblin_i.change_direction(random.randint(0, 3), random.randint(0, 2))
+                    goblin_j.change_direction(random.randint(0, 3), random.randint(0, 2))
 
                 change_dir_countdown = 30
         
