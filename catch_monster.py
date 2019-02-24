@@ -244,9 +244,9 @@ def main():
             stop_game = True
 
         # Call function for collision
-        hero.distance(monster)
-        # Goblin catch hero
+        # Goblin catch hero and hero catch monster
         if free_count == 0:
+            hero.distance(monster)
             goblin.distance(hero)
             goblin_b.distance(hero)
             goblin_c.distance(hero)
