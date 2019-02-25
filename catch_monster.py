@@ -114,7 +114,8 @@ def main():
     textfont = pygame.font.SysFont(None, 30)
     levelfont = pygame.font.SysFont(None, 26)
     overfont = pygame.font.SysFont(None, 40)
-    win_text = textfont.render('Hit ENTER to play again!', 1, (0, 0, 0))
+    catch_text = textfont.render('Nice catch!', 1, (0, 0, 0))
+    win_text = textfont.render('Hit ENTER to go to the next level', 1, (0, 0, 0))
     lose_text = textfont.render('You lose! Hit ENTER to play again.', 1, (0, 0, 0))
     caught_text = textfont.render('You caught all the monsters!', 1, (0, 0, 0))
     over_text = overfont.render('Game Over', 1, (0, 0, 0))
@@ -262,63 +263,6 @@ def main():
             goblin_h.distance(hero)
             goblin_i.distance(hero)
             goblin_j.distance(hero)
-        # # Monster bump with goblins
-        # monster.distance(goblin)
-        # monster.distance(goblin_b)
-        # monster.distance(goblin_c)
-        # monster.distance(goblin_d)
-        # monster.distance(goblin_e)
-        # monster.distance(goblin_f)
-        # monster.distance(goblin_g)
-        # monster.distance(goblin_h)
-        # monster.distance(goblin_i)
-        # monster.distance(goblin_j)
-        # # Goblins bump each other
-        # goblin.distance(goblin_b)
-        # goblin.distance(goblin_c)
-        # goblin.distance(goblin_d)
-        # goblin.distance(goblin_e)
-        # goblin.distance(goblin_f)
-        # goblin.distance(goblin_g)
-        # goblin.distance(goblin_h)
-        # goblin.distance(goblin_i)
-        # goblin.distance(goblin_j)
-        # goblin_b.distance(goblin_c)
-        # goblin_b.distance(goblin_d)
-        # goblin_b.distance(goblin_e)
-        # goblin_b.distance(goblin_f)
-        # goblin_b.distance(goblin_g)
-        # goblin_b.distance(goblin_h)
-        # goblin_b.distance(goblin_i)
-        # goblin_b.distance(goblin_j)
-        # goblin_c.distance(goblin_d)
-        # goblin_c.distance(goblin_e)
-        # goblin_c.distance(goblin_f)
-        # goblin_c.distance(goblin_g)
-        # goblin_c.distance(goblin_h)
-        # goblin_c.distance(goblin_i)
-        # goblin_c.distance(goblin_j)
-        # goblin_d.distance(goblin_e)
-        # goblin_d.distance(goblin_f)
-        # goblin_d.distance(goblin_g)
-        # goblin_d.distance(goblin_h)
-        # goblin_d.distance(goblin_i)
-        # goblin_d.distance(goblin_j)
-        # goblin_e.distance(goblin_f)
-        # goblin_e.distance(goblin_g)
-        # goblin_e.distance(goblin_h)
-        # goblin_e.distance(goblin_i)
-        # goblin_e.distance(goblin_j)
-        # goblin_f.distance(goblin_g)
-        # goblin_f.distance(goblin_h)
-        # goblin_f.distance(goblin_i)
-        # goblin_f.distance(goblin_j)
-        # goblin_g.distance(goblin_h)
-        # goblin_g.distance(goblin_i)
-        # goblin_g.distance(goblin_j)
-        # goblin_h.distance(goblin_i)
-        # goblin_h.distance(goblin_j)
-        # goblin_i.distance(goblin_j)
 
         # Game logic
         if level < 6:
@@ -440,11 +384,12 @@ def main():
 
         # When catch a monster, play sound effect, put text, end game
         else:
-            if level <= 5:
+            if level <= 5 and level > 0:
                 if win_sound == 0:
                     win.play()
                     win_sound = 1
-                screen.blit(win_text, (140, 224))
+                screen.blit(catch_text, (200, 180))
+                screen.blit(win_text, (100, 224))
                 goblin.x = 512
                 goblin.y = 480
                 goblin_b.x = 512
@@ -469,9 +414,9 @@ def main():
                     level += 1
             
             # Play again when ENTER is pressed
-            # Each level, increase goblin by 1
+            # Each level, add more goblins
             # Goblins stop for a while before moving when starting new game
-            if level <= 5:   
+            if level <= 5:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
                         free_count += 1
