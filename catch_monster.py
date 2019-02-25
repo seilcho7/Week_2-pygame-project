@@ -114,8 +114,12 @@ def main():
     textfont = pygame.font.SysFont(None, 30)
     levelfont = pygame.font.SysFont(None, 26)
     overfont = pygame.font.SysFont(None, 40)
+    titlefont = pygame.font.SysFont(None, 60)
+    title_text = titlefont.render('Catch Monsters', 1, (0, 0, 0))
+    subtitle_text = textfont.render('Hit ENTER to play!', 1, (0, 0, 0))
+    ins_text = textfont.render('Use arrow keys to move your hero.', 1, (0, 0, 0))
     catch_text = textfont.render('Nice catch!', 1, (0, 0, 0))
-    win_text = textfont.render('Hit ENTER to go to the next level', 1, (0, 0, 0))
+    win_text = textfont.render('Hit ENTER to go to the next level.', 1, (0, 0, 0))
     lose_text = textfont.render('You lose! Hit ENTER to play again.', 1, (0, 0, 0))
     caught_text = textfont.render('You caught all the monsters!', 1, (0, 0, 0))
     over_text = overfont.render('Game Over', 1, (0, 0, 0))
@@ -148,7 +152,7 @@ def main():
     
     pygame.init()
     screen = pygame.display.set_mode((width, height))
-    pygame.display.set_caption('Catch Monsters')
+    pygame.display.set_caption('Seil Cho')
     clock = pygame.time.Clock()
     
     # Load background image
@@ -203,12 +207,14 @@ def main():
     free_count = 0
     free_countdown = 60
 
+    title = True
+
     stop_game = False
     while not stop_game:
         # Set level text to update every level
-        if level < 6:
-            level_text = levelfont.render(('Level %d' % level), 1, (255, 255, 255))
-        
+        if title == False:
+            if level < 6:
+                level_text = levelfont.render(('Level %d' % level), 1, (255, 255, 255))  
         # When arrow keys are pressed down, move hero character to direction of arrow
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -251,72 +257,74 @@ def main():
 
         # Call function for collision
         # Goblin catch hero and hero catch monster
-        if free_count == 0:
-            hero.distance(monster)
-            goblin.distance(hero)
-            goblin_b.distance(hero)
-            goblin_c.distance(hero)
-            goblin_d.distance(hero)
-            goblin_e.distance(hero)
-            goblin_f.distance(hero)
-            goblin_g.distance(hero)
-            goblin_h.distance(hero)
-            goblin_i.distance(hero)
-            goblin_j.distance(hero)
+        if title == False:
+            if free_count == 0:
+                hero.distance(monster)
+                goblin.distance(hero)
+                goblin_b.distance(hero)
+                goblin_c.distance(hero)
+                goblin_d.distance(hero)
+                goblin_e.distance(hero)
+                goblin_f.distance(hero)
+                goblin_g.distance(hero)
+                goblin_h.distance(hero)
+                goblin_i.distance(hero)
+                goblin_j.distance(hero)
 
-        # Game logic
-        if level < 6:
-            hero.move(hero.direction_x, hero.direction_y)
-            monster.move()
-            goblin.move()
-            if level >= 2:
-                goblin_b.move()
-                goblin_c.move()
-            if level >= 3:
-                goblin_d.move()
-                goblin_e.move()
-            if level >= 4:
-                goblin_f.move()
-                goblin_g.move()
-            if level >= 5:
-                goblin_h.move()
-                goblin_i.move()
-                goblin_j.move()
-        
-        # Every loop, change_dir_countdown decrease by 1
-        change_dir_countdown -= 1
-
-        # Hero does not die as long as free_count is 1
-        free_countdown -= 1
-        if free_countdown == 0:
-            free_count = 0
-        
-        # When countdown hit 0, monster change to random direction and speed
-        if level < 6:
-            if change_dir_countdown == 0:
-                monster.change_direction(random.randint(0, 3), random.randint(0, 4))
-                goblin.change_direction(random.randint(0, 3), random.randint(0, 2))
+            # Game logic
+            if level < 6:
+                hero.move(hero.direction_x, hero.direction_y)
+                monster.move()
+                goblin.move()
                 if level >= 2:
-                    goblin_b.change_direction(random.randint(0, 3), random.randint(0, 2))
-                    goblin_c.change_direction(random.randint(0, 3), random.randint(0, 2))
+                    goblin_b.move()
+                    goblin_c.move()
                 if level >= 3:
-                    goblin_d.change_direction(random.randint(0, 3), random.randint(0, 2))
-                    goblin_e.change_direction(random.randint(0, 3), random.randint(0, 2))
+                    goblin_d.move()
+                    goblin_e.move()
                 if level >= 4:
-                    goblin_f.change_direction(random.randint(0, 3), random.randint(0, 2))
-                    goblin_g.change_direction(random.randint(0, 3), random.randint(0, 2))
+                    goblin_f.move()
+                    goblin_g.move()
                 if level >= 5:
-                    goblin_h.change_direction(random.randint(0, 3), random.randint(0, 2))
-                    goblin_i.change_direction(random.randint(0, 3), random.randint(0, 2))
-                    goblin_j.change_direction(random.randint(0, 3), random.randint(0, 2))
+                    goblin_h.move()
+                    goblin_i.move()
+                    goblin_j.move()
+          
+            # Every loop, change_dir_countdown decrease by 1
+            change_dir_countdown -= 1
 
-                change_dir_countdown = 30
+            # Hero does not die as long as free_count is 1
+            free_countdown -= 1
+            if free_countdown == 0:
+                free_count = 0
+            
+            # When countdown hit 0, monster change to random direction and speed
+            if level < 6:
+                if change_dir_countdown == 0:
+                    monster.change_direction(random.randint(0, 3), random.randint(0, 4))
+                    goblin.change_direction(random.randint(0, 3), random.randint(0, 2))
+                    if level >= 2:
+                        goblin_b.change_direction(random.randint(0, 3), random.randint(0, 2))
+                        goblin_c.change_direction(random.randint(0, 3), random.randint(0, 2))
+                    if level >= 3:
+                        goblin_d.change_direction(random.randint(0, 3), random.randint(0, 2))
+                        goblin_e.change_direction(random.randint(0, 3), random.randint(0, 2))
+                    if level >= 4:
+                        goblin_f.change_direction(random.randint(0, 3), random.randint(0, 2))
+                        goblin_g.change_direction(random.randint(0, 3), random.randint(0, 2))
+                    if level >= 5:
+                        goblin_h.change_direction(random.randint(0, 3), random.randint(0, 2))
+                        goblin_i.change_direction(random.randint(0, 3), random.randint(0, 2))
+                        goblin_j.change_direction(random.randint(0, 3), random.randint(0, 2))
+
+                    change_dir_countdown = 30
         
         # Draw background
         screen.blit(background_image, (0, 0))
 
-        # Show level on top left
-        screen.blit(level_text, (5, 5))
+        if title == False:
+            # Show level on top left
+            screen.blit(level_text, (5, 5))
         
         # Show hero as long as it is alive
         if hero.show == True:
@@ -412,7 +420,7 @@ def main():
                 goblin_j.y = 480
                 if level == 5:
                     level += 1
-            
+                
             # Play again when ENTER is pressed
             # Each level, add more goblins
             # Goblins stop for a while before moving when starting new game
@@ -481,29 +489,30 @@ def main():
                                         goblin_j.y = random.randint(35, 413)
                                         goblin_j.direction_x = 0
                                         goblin_j.direction_y = 0
-                                                                
+                                                                    
         # Show goblins
-        if goblin.show == True:
-            screen.blit(goblin_image, (goblin.x, goblin.y))
-        if goblin_b.show == True:
-            screen.blit(goblin_image, (goblin_b.x, goblin_b.y))
-        if goblin_c.show == True:
-            screen.blit(goblin_image, (goblin_c.x, goblin_c.y))
-        if goblin_d.show == True:
-            screen.blit(goblin_image, (goblin_d.x, goblin_d.y))
-        if goblin_e.show == True:
-            screen.blit(goblin_image, (goblin_e.x, goblin_e.y))
-        if goblin_f.show == True:
-            screen.blit(goblin_image, (goblin_f.x, goblin_f.y))
-        if goblin_g.show == True:
-            screen.blit(goblin_image, (goblin_g.x, goblin_g.y))
-        if goblin_h.show == True:
-            screen.blit(goblin_image, (goblin_h.x, goblin_h.y))
-        if goblin_i.show == True:
-            screen.blit(goblin_image, (goblin_i.x, goblin_i.y))
-        if goblin_j.show == True:
-            screen.blit(goblin_image, (goblin_j.x, goblin_j.y))
-        
+        if title == False:
+            if goblin.show == True:
+                screen.blit(goblin_image, (goblin.x, goblin.y))
+            if goblin_b.show == True:
+                screen.blit(goblin_image, (goblin_b.x, goblin_b.y))
+            if goblin_c.show == True:
+                screen.blit(goblin_image, (goblin_c.x, goblin_c.y))
+            if goblin_d.show == True:
+                screen.blit(goblin_image, (goblin_d.x, goblin_d.y))
+            if goblin_e.show == True:
+                screen.blit(goblin_image, (goblin_e.x, goblin_e.y))
+            if goblin_f.show == True:
+                screen.blit(goblin_image, (goblin_f.x, goblin_f.y))
+            if goblin_g.show == True:
+                screen.blit(goblin_image, (goblin_g.x, goblin_g.y))
+            if goblin_h.show == True:
+                screen.blit(goblin_image, (goblin_h.x, goblin_h.y))
+            if goblin_i.show == True:
+                screen.blit(goblin_image, (goblin_i.x, goblin_i.y))
+            if goblin_j.show == True:
+                screen.blit(goblin_image, (goblin_j.x, goblin_j.y))
+            
         # Game over text after beating level 10
         # Ask player to player to press ENTER to play again
         if level == 6:
@@ -520,7 +529,17 @@ def main():
                     level = 0
                     pygame.mixer.music.play(-1)
                     victory.stop()
+        # Title screen
+        if title == True:
+            screen.blit(title_text, (95, 180))
+            screen.blit(subtitle_text, (170, 240))
+            screen.blit(ins_text, (90, 380))
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    title = False
         
+        if event.type == pygame.QUIT:
+            stop_game = True
         # Game display
         pygame.display.update()
         clock.tick(60)
