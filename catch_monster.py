@@ -272,6 +272,7 @@ def main():
                 goblin_j.distance(hero)
 
             # Game logic
+            # Characters start moving
             if level < 6:
                 hero.move(hero.direction_x, hero.direction_y)
                 monster.move()
