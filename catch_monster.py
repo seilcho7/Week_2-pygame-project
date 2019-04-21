@@ -152,7 +152,7 @@ def main():
     
     pygame.init()
     screen = pygame.display.set_mode((width, height))
-    pygame.display.set_caption('Seil Cho')
+    pygame.display.set_caption('Catch Monster')
     clock = pygame.time.Clock()
     
     # Load background image
